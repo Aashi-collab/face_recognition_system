@@ -11,7 +11,7 @@ class Face_Recognition_system:
         self.root.title("Face Recognition System")
 
         #1st
-        img=Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\Stanford.jpg")
+        img=Image.open("college_images/Stanford.jpg")
         img=img.resize((500,130),Image.LANCZOS)
         self.photoimg=ImageTk.PhotoImage(img)
 
@@ -20,7 +20,7 @@ class Face_Recognition_system:
 
 
         #2nd
-        img1=Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\facialrecognition.png")
+        img1=Image.open("college_images/facialrecognition.png")
         img1=img1.resize((500,130),Image.LANCZOS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
@@ -29,7 +29,7 @@ class Face_Recognition_system:
 
 
         #3rd
-        img2=Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\u.jpg")
+        img2=Image.open("college_images/u.jpg")
         img2=img2.resize((500,130),Image.LANCZOS)
         self.photoimg2=ImageTk.PhotoImage(img2)
 
@@ -38,7 +38,7 @@ class Face_Recognition_system:
         
 
         #bg image
-        img3=Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\bg.jpg")
+        img3=Image.open("college_images/bg.jpg")
         img3=img3.resize((1530,710),Image.LANCZOS)
         self.photoimg3=ImageTk.PhotoImage(img3)
 
@@ -49,7 +49,7 @@ class Face_Recognition_system:
         title_lbl.place(x=0,y=0,width=1530,height=45)
 
         #student button
-        img4=Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\stu.jpg")
+        img4=Image.open("college_images/stu.jpg")
         img4=img4.resize((220, 220), Image.LANCZOS)
         self.photoimg4=ImageTk.PhotoImage(img4)
 
@@ -60,7 +60,7 @@ class Face_Recognition_system:
         b1_1.place(x=200, y=300, width=220, height=40)
 
         # detect face button
-        img5 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\aashi_new_face_detector1.jpg")
+        img5 = Image.open("college_images/aashi_new_face_detector1.jpg")
         img5 = img5.resize((220, 220), Image.LANCZOS)
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
@@ -71,7 +71,7 @@ class Face_Recognition_system:
         b1_1.place(x=500, y=300, width=220, height=40)
 
         # attendace face button
-        img6 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\attendance.jpg")
+        img6 = Image.open("college_images/attendance.jpg")
         img6 = img6.resize((220, 220), Image.LANCZOS)
         self.photoimg6 = ImageTk.PhotoImage(img6)
 
@@ -82,7 +82,7 @@ class Face_Recognition_system:
         b1_1.place(x=800, y=300, width=220, height=40)
 
         # help desk button
-        img7 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\help-desk.jpg")
+        img7 = Image.open("college_images/help-desk.jpg")
         img7 = img7.resize((220, 220), Image.LANCZOS)
         self.photoimg7 = ImageTk.PhotoImage(img7)
 
@@ -93,7 +93,7 @@ class Face_Recognition_system:
         b1_1.place(x=1100, y=300, width=220, height=40)
 
         # train face button
-        img8 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\Train.jpg")
+        img8 = Image.open("college_images/Train.jpg")
         img8 = img8.resize((220, 220), Image.LANCZOS)
         self.photoimg8 = ImageTk.PhotoImage(img8)
 
@@ -104,7 +104,7 @@ class Face_Recognition_system:
         b1_1.place(x=200, y=580, width=220, height=40)
 
         # photos face button
-        img9 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\photos.jpg")
+        img9 = Image.open("college_images/photos.jpg")
         img9 = img9.resize((220, 220), Image.LANCZOS)
         self.photoimg9 = ImageTk.PhotoImage(img9)
 
@@ -115,7 +115,7 @@ class Face_Recognition_system:
         b1_1.place(x=500, y=580, width=220, height=40)
 
         # developer button
-        img10 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\developer.jpg")
+        img10 = Image.open("college_images/developer.jpg")
         img10 = img10.resize((220, 220), Image.LANCZOS)
         self.photoimg10 = ImageTk.PhotoImage(img10)
 
@@ -126,7 +126,7 @@ class Face_Recognition_system:
         b1_1.place(x=800, y=580, width=220, height=40)
 
         # exit button
-        img11 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\exit.jpg")
+        img11 = Image.open("college_images/exit.jpg")
         img11 = img11.resize((220, 220), Image.LANCZOS)
         self.photoimg11 = ImageTk.PhotoImage(img11)
 

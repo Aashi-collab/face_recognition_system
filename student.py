@@ -32,7 +32,7 @@ class Student:
 
 
         # 1st
-        img = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\har.jpg")
+        img = Image.open("college_images/har.jpg")
         img = img.resize((500, 130), Image.LANCZOS)
         self.photoimg = ImageTk.PhotoImage(img)
 
@@ -40,8 +40,7 @@ class Student:
         f_lbl.place(x=0, y=0, width=500, height=130)
 
         # 2nd
-        img1 = Image.open(
-            r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\face-recognition.png")
+        img1 = Image.open("college_images/face-recognition.png")
         img1 = img1.resize((500, 130), Image.LANCZOS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -49,7 +48,7 @@ class Student:
         f_lbl.place(x=500, y=0, width=550, height=130)
 
         # 3rd
-        img2 = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\student.jpg")
+        img2 = Image.open("college_images/student.jpg")
         img2 = img2.resize((500, 130), Image.LANCZOS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -57,7 +56,7 @@ class Student:
         f_lbl.place(x=1000, y=0, width=550, height=130)
 
 #bg image
-        img3=Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\bg.jpg")
+        img3=Image.open("college_images/bg.jpg")
         img3=img3.resize((1530,710),Image.LANCZOS)
         self.photoimg3=ImageTk.PhotoImage(img3)
 
@@ -76,7 +75,7 @@ class Student:
         Left_frame=LabelFrame(main_frame, bd=2, bg="white", relief=RIDGE, text="Student Details",font=("times new roman", 12, "bold"))
         Left_frame.place(x=10, y=10, width=730, height=580)
 
-        img_left = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\attendance.jpg")
+        img_left = Image.open("college_images/attendance.jpg")
         img_left = img_left.resize((720, 130), Image.LANCZOS)
         self.photoimg_left = ImageTk.PhotoImage(img_left)
 
@@ -251,7 +250,7 @@ class Student:
         Right_frame=LabelFrame(main_frame, bd=2, bg="white", relief=RIDGE, text="Student Details",font=("times new roman", 12, "bold"))
         Right_frame.place(x=780, y=10, width=660, height=580)
 
-        img_right = Image.open(r"C:\Users\aashi\OneDrive\Desktop\face recognization system\college_images\stu.jpg")
+        img_right = Image.open("college_images/stu.jpg")
         img_right = img_right.resize((720, 130), Image.LANCZOS)
         self.photoimg_right = ImageTk.PhotoImage(img_right)
 
