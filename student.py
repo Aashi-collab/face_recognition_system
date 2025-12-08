@@ -1,6 +1,7 @@
 from tkinter import*
 from tkinter import ttk
-from PIL import Image, ImageTk
+from PIL import Image 
+from PIL import ImageTk
 from tkinter import messagebox
 import mysql.connector
 
@@ -10,9 +11,9 @@ class Student:
         self.root=root
         self.root.geometry("1530x790+0+0")
         self.root.title("Face Recognition System")
-
-#=========variable========
-
+        
+          #=========variable========
+        
         self.var_dep=StringVar()
         self.var_course = StringVar()
         self.var_year= StringVar()
@@ -55,7 +56,7 @@ class Student:
         f_lbl = Label(self.root, image=self.photoimg2)
         f_lbl.place(x=1000, y=0, width=550, height=130)
 
-#bg image
+        #bg image
         img3=Image.open("college_images/bg.jpg")
         img3=img3.resize((1530,710),Image.LANCZOS)
         self.photoimg3=ImageTk.PhotoImage(img3)
@@ -70,7 +71,7 @@ class Student:
         main_frame=Frame(bg_img,bd=2, bg="white")
         main_frame.place(x=20, y=50, width=1480, height=650)
 
-#left label frame
+         #left label frame
 
         Left_frame=LabelFrame(main_frame, bd=2, bg="white", relief=RIDGE, text="Student Details",font=("times new roman", 12, "bold"))
         Left_frame.place(x=10, y=10, width=730, height=580)
@@ -83,11 +84,11 @@ class Student:
         f_lbl.place(x=5, y=0, width=720, height=130)
 
 
-#current course
+          #current course
         current_course_frame = LabelFrame(Left_frame, bd=2, bg="white", relief=RIDGE, text="Current Course Information",font=("times new roman", 12, "bold"))
         current_course_frame.place(x=5, y=135, width=715, height=150)
 
-#Department
+           #Department
         dep_label=Label(current_course_frame, text="Department",font=("times new roman", 13, "bold"),bg="white")
         dep_label.grid(row=0, column=0,padx=10)
 
@@ -96,7 +97,7 @@ class Student:
         dep_combo.current(0)
         dep_combo.grid(row=0,column=1,padx=2,pady=10)
 
-#course
+         #course
         course_label=Label(current_course_frame, text="Course",font=("times new roman",13, "bold"),bg="white")
         course_label.grid(row=0,column=2,padx=10,sticky=W)
 
@@ -105,7 +106,7 @@ class Student:
         course_combo.current(0)
         course_combo.grid(row=0,column=3,padx=2,pady=10,sticky=W)
 
-#year
+        #year
         year_label=Label(current_course_frame,text="year",font=("times new roman", 13, "bold"),bg="white")
         year_label.grid(row=1, column=0,padx=10, sticky=W)
 
@@ -114,7 +115,7 @@ class Student:
         year_combo.current(0)
         year_combo.grid(row=1,column=1,padx=2,pady=10,sticky=W)
 
-#semester
+        #semester
         semester_label = Label(current_course_frame, text="Semester", font=("times new roman", 13, "bold"), bg="white")
         semester_label.grid(row=1, column=2, padx=10, sticky=W)
 
@@ -124,11 +125,11 @@ class Student:
         semester_combo.grid(row=1, column=3, padx=2, pady=10, sticky=W)
 
 
-# student information
+        # student information
         class_Student_frame = LabelFrame(Left_frame, bd=2, bg="white", relief=RIDGE, text="Class Student Information",font=("times new roman", 12, "bold"))
         class_Student_frame.place(x=15, y=250, width=700, height=300)
 
-# student_id
+         # student_id
 
         studentId_label = Label(class_Student_frame, text="Student ID:", font=("times new roman", 13, "bold"), bg="white")
         studentId_label.grid(row=0, column=0, padx=10,pady=5,sticky=W)
@@ -174,7 +175,7 @@ class Student:
         gender_combo.current(0)
         gender_combo.grid(row=2, column=1, padx=10, pady=5, sticky=W)
 
-        #dob
+#dob
         dob_label = Label(class_Student_frame, text="DOB:", font=("times new roman", 13, "bold"),bg="white")
         dob_label.grid(row=2, column=2, padx=10, pady=5, sticky=W)
 
@@ -188,7 +189,7 @@ class Student:
         email_entry = ttk.Entry(class_Student_frame,textvariable=self.var_email, width=20, font=("times new roman", 13, "bold"))
         email_entry.grid(row=3, column=1, padx=10, pady=5, sticky=W)
 
-#pone no
+#phone no
         phone_label = Label(class_Student_frame, text="Phone No:", font=("times new roman", 13, "bold"),bg="white")
         phone_label.grid(row=3, column=2, padx=10, pady=5, sticky=W)
 
@@ -202,23 +203,22 @@ class Student:
         address_entry = ttk.Entry(class_Student_frame,textvariable=self.var_address, width=20, font=("times new roman", 13, "bold"))
         address_entry.grid(row=4, column=1, padx=10, pady=5, sticky=W)
 
-#teacher name
+          #teacher name
         teacher_label = Label(class_Student_frame, text="Teacher Name:", font=("times new roman", 13, "bold"),bg="white")
         teacher_label.grid(row=4, column=2, padx=10, pady=5, sticky=W)
 
         teacher_entry = ttk.Entry(class_Student_frame,textvariable=self.var_teacher, width=20, font=("times new roman", 13, "bold"))
         teacher_entry.grid(row=4, column=3, padx=10, pady=5, sticky=W)
 
-#radio button
+           #radio button
         self.var_radio1=StringVar()
         radiobtn1=ttk.Radiobutton(class_Student_frame,variable=self.var_radio1, text="Take Photo Sample", value="Yes")
         radiobtn1.grid(row=6, column=0)
 
-        self.var_radio2=StringVar()
         radiobtn2 = ttk.Radiobutton(class_Student_frame,variable=self.var_radio1, text="No Photo Sample", value="No")
         radiobtn2.grid(row=6, column=1)
 
-#button frame
+          #button frame
         btn_frame=Frame(class_Student_frame,bd=2,relief= RIDGE, bg="white")
         btn_frame.place(x=0,y=200,width=710,height=35)
 
@@ -335,42 +335,50 @@ class Student:
 #=========function declaration========
 
     def add_data(self):
-        if self.var_dep.get()=="Select Department" or self.var_std_name.get()==""or self.var_std_id.get()=="" :
+        if self.var_dep.get() == "Select Department" or self.var_std_name.get() == "" or self.var_std_id.get() == "":
             messagebox.showerror("Error", "All Fields are Required", parent=self.root)
         else:
             try:
-                conn = mysql.connector.connect(host="localhost", username = "root", password = "Aashi@123", database = "face_recognition_system")
+                conn = mysql.connector.connect(
+                    host="localhost",
+                    username="root",
+                    password="6394",
+                    database="face_recognition_system"
+                )
                 my_cursor = conn.cursor()
-                my_cursor.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
-
-                                                                                                                self.var_dep.get(),
-                                                                                                                self.var_course.get(),
-                                                                                                                self.var_year.get(),
-                                                                                                                self.var_semester.get(),
-                                                                                                                self.var_std_id.get(),
-                                                                                                                self.var_std_name.get(),
-                                                                                                                self.var_div.get(),
-                                                                                                                self.var_roll.get(),
-                                                                                                                self.var_gender.get(),
-                                                                                                                self.var_dob.get(),
-                                                                                                                self.var_email.get(),
-                                                                                                                self.var_phone.get(),
-                                                                                                                self.var_address.get(),
-                                                                                                                self.var_teacher.get(),
-                                                                                                                self.var_radio1.get()
-
-                                                                                                             ))
+                my_cursor.execute(
+                    "INSERT INTO student VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    (
+                        self.var_dep.get(),
+                        self.var_course.get(),
+                        self.var_year.get(),
+                        self.var_semester.get(),
+                        self.var_std_id.get(),
+                        self.var_std_name.get(),
+                        self.var_div.get(),
+                        self.var_roll.get(),
+                        self.var_gender.get(),
+                        self.var_dob.get(),
+                        self.var_email.get(),
+                        self.var_phone.get(),
+                        self.var_address.get(),
+                        self.var_teacher.get(),
+                        self.var_radio1.get()
+                    )
+                )
                 conn.commit()
                 self.fetch_data()
                 conn.close()
                 messagebox.showinfo("Success", "Student details has been added Successfully", parent=self.root)
+
             except Exception as es:
-                messagebox.showerror("Error", f"Due To :{str(es)}", parent=self.root)
+                messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
+
 
     # =====function to fetch data in database====
 
     def fetch_data(self):
-        conn = mysql.connector.connect(host="localhost", username="root", password="Aashi@123",database="face_recognition_system")
+        conn = mysql.connector.connect(host="localhost", username="root", password="6394",database="face_recognition_system")
         my_cursor = conn.cursor()
         my_cursor.execute("select*from student")
         data=my_cursor.fetchall()
