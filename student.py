@@ -203,14 +203,14 @@ class Student:
         address_entry = ttk.Entry(class_Student_frame,textvariable=self.var_address, width=20, font=("times new roman", 13, "bold"))
         address_entry.grid(row=4, column=1, padx=10, pady=5, sticky=W)
 
-          #teacher name
+  #teacher name
         teacher_label = Label(class_Student_frame, text="Teacher Name:", font=("times new roman", 13, "bold"),bg="white")
         teacher_label.grid(row=4, column=2, padx=10, pady=5, sticky=W)
 
         teacher_entry = ttk.Entry(class_Student_frame,textvariable=self.var_teacher, width=20, font=("times new roman", 13, "bold"))
         teacher_entry.grid(row=4, column=3, padx=10, pady=5, sticky=W)
 
-           #radio button
+ #radio button
         self.var_radio1=StringVar()
         radiobtn1=ttk.Radiobutton(class_Student_frame,variable=self.var_radio1, text="Take Photo Sample", value="Yes")
         radiobtn1.grid(row=6, column=0)
@@ -218,7 +218,7 @@ class Student:
         radiobtn2 = ttk.Radiobutton(class_Student_frame,variable=self.var_radio1, text="No Photo Sample", value="No")
         radiobtn2.grid(row=6, column=1)
 
-          #button frame
+ #button frame
         btn_frame=Frame(class_Student_frame,bd=2,relief= RIDGE, bg="white")
         btn_frame.place(x=0,y=200,width=710,height=35)
 
@@ -245,7 +245,7 @@ class Student:
         update_photo_btn.grid(row=0, column=1)
 
 
-        #right label frame
+ #right label frame
 
         Right_frame=LabelFrame(main_frame, bd=2, bg="white", relief=RIDGE, text="Student Details",font=("times new roman", 12, "bold"))
         Right_frame.place(x=780, y=10, width=660, height=580)
