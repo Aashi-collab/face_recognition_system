@@ -424,9 +424,9 @@ class Student:
             try:
                 update=messagebox.askyesno("Update", "Do you want to update this student details", parent=self.root)
                 if update>0:
-                    conn=mysql.connector.connect(host="localhost", username="root", password="Aashi@123",database="face_recognition_system")
+                    conn=mysql.connector.connect(host="localhost", username="root", password="6394",database="face_recognition_system")
                     my_cursor=conn.cursor()
-                    my_cursor.execute("update student set Dep=%s,course=%s,Year=%s,Semester=%s,Name=%s,Division=%s,Roll=%s,Gender=%s,Dob=%s,Email=%s,Phone=%s,Address=%s,Teacher=%s,`Photo Sample`=%s where `Student id`=%s",(
+                    my_cursor.execute("update student set Dep=%s,course=%s,Year=%s,Semester=%s,Name=%s,Division=%s,Roll=%s,Gender=%s,Dob=%s,Email=%s,Phone=%s,Address=%s,Teacher=%s,PhotoSample=%s where Student_id=%s",(
 
                                                                                                                                                                                      self.var_dep.get(),
                                                                                                                                                                                      self.var_course.get(),
@@ -465,7 +465,7 @@ class Student:
             try:
                 delete=messagebox.askyesno("Student Delete Page", "Do you want to delete this student", parent=self.root)
                 if delete>0:
-                    conn = mysql.connector.connect(host="localhost", username="root", password="Aashi@123",database="face_recognition_system")
+                    conn = mysql.connector.connect(host="localhost", username="root", password="6394",database="face_recognition_system")
                     my_cursor = conn.cursor()
                     sql="delete from student where Student_id=%s"
                     val=(self.var_std_id.get(),)
