@@ -4,7 +4,8 @@ from PIL import Image
 from PIL import ImageTk
 from tkinter import messagebox
 import mysql.connector
-
+import cv2
+import os
 
 class Student:
     def __init__(self,root):
@@ -238,7 +239,7 @@ class Student:
         btn_frame1.place(x=0, y=235, width=710, height=35)
 
 
-        take_photo_btn = Button(btn_frame1, text="Take Photo Sample", width=35, font=("times of roman", 13, "bold"), bg="blue",fg = "white")
+        take_photo_btn = Button(btn_frame1,command=self.generate_dataset, text="Take Photo Sample", width=35, font=("times of roman", 13, "bold"), bg="blue",fg = "white")
         take_photo_btn.grid(row=0, column=0)
 
         update_photo_btn = Button(btn_frame1, text="Update Photo Sample", width=35, font=("times of roman", 13, "bold"),bg="blue", fg="white")
@@ -501,49 +502,114 @@ class Student:
 
 #====generate dataset and take a sample======
 
-    """def generate_dataset(self):
-        if self.var_dep.get()=="Select Department" or self.var_std_name.get()==""or self.var_std_id.get()=="" :
-           messagebox.showerror("Error", "All Fields are Required", parent=self.root)
-        else:
-            try:
-                conn=mysql.connector.connect(host="localhost", username="root", password="Aashi@123",database="face_recognition_system")
-                my_cursor=conn.cursor()
-                my_cursor.execute("select *from student")
-                myresult=my_cursor.fetchall()
-                id=0
-                for x in myresult:
-                    id+=1
-            my_cursor.execute(
-                "update student set Dep=%s,course=%s,Year=%s,Semester=%s,Name=%s,Division=%s,Roll=%s,Gender=%s,Dob=%s,Email=%s,Phone=%s,Address=%s,Teacher=%s,`Photo Sample`=%s where `Student id`=%s",
-                (
-
-                    self.var_dep.get(),
-                    self.var_course.get(),
-                    self.var_year.get(),
-                    self.var_semester.get(),
-                    self.var_std_name.get(),
-                    self.var_div.get(),
-                    self.var_roll.get(),
-                    self.var_gender.get(),
-                    self.var_dob.get(),
-                    self.var_email.get(),
-                    self.var_phone.get(),
-                    self.var_address.get(),
-                    self.var_teacher.get(),
-                    self.var_radio1.get(),
-                    self.var_std_id.get()
-
-                ))
+    def generate_dataset(self):
+        # Validate basic fields
+        if self.var_dep.get() == "Select Department" or self.var_std_name.get().strip() == "" or self.var_std_id.get().strip() == "":
+            messagebox.showerror("Error", "All Fields are Required", parent=self.root)
+            return
+    
+        try:
+            # ----------------- database update (fixes) -----------------
+            conn = mysql.connector.connect(host="localhost", username="root", password="6394", database="face_recognition_system")
+            my_cursor = conn.cursor()
+            my_cursor.execute("select * from student")
+            myresult = my_cursor.fetchall()
+    
+            next_id = len(myresult) + 1   # NOTE: don't rely on this for Student_id uniqueness — better to use the student's actual id
+    
+            # Corrected: last parameter in WHERE must be Student_id value, not a boolean expression
+            update_sql = """
+                UPDATE student
+                SET Dep=%s, course=%s, Year=%s, Semester=%s, Name=%s, Division=%s, Roll=%s,
+                    Gender=%s, Dob=%s, Email=%s, Phone=%s, Address=%s, Teacher=%s, PhotoSample=%s
+                WHERE Student_id=%s
+            """
+            update_vals = (
+                self.var_dep.get(),
+                self.var_course.get(),
+                self.var_year.get(),
+                self.var_semester.get(),
+                self.var_std_name.get(),
+                self.var_div.get(),
+                self.var_roll.get(),
+                self.var_gender.get(),
+                self.var_dob.get(),
+                self.var_email.get(),
+                self.var_phone.get(),
+                self.var_address.get(),
+                self.var_teacher.get(),
+                self.var_radio1.get(),
+                self.var_std_id.get()
+            )
+            my_cursor.execute(update_sql, update_vals)
             conn.commit()
             self.fetch_data()
             self.reset_data()
-            conn.close()"""
-
-
-
-
-
-
+            conn.close()
+    
+            # ----------------- face capture -----------------
+            # Use OpenCV's bundled cascade path to avoid missing-file issues
+            cascade_path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+            face_classifier = cv2.CascadeClassifier(cascade_path)
+            if face_classifier.empty():
+                raise FileNotFoundError(f"Haarcascade not found at: {cascade_path}")
+    
+            # Ensure output dir exists
+            os.makedirs("Data", exist_ok=True)
+    
+            # Define helper to return cropped face or None
+            def face_cropped(img):
+                if img is None:
+                    return None
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                faces = face_classifier.detectMultiScale(gray, 1.3, 5)
+                for (x, y, w, h) in faces:
+                    return img[y:y+h, x:x+w]
+                return None
+    
+            # Open camera
+            cap = cv2.VideoCapture(0)
+            if not cap.isOpened():
+                raise IOError("Cannot open webcam (index 0). Try another index or check camera permissions.")
+    
+            img_id = 0
+            user_id = str(self.var_std_id.get())  # ensure string for filename
+    
+            while True:
+                ret, frame = cap.read()
+                if not ret or frame is None:
+                    # skip/try again if frame not captured
+                    print("Warning: camera frame not received, retrying...")
+                    cv2.waitKey(50)
+                    continue
+    
+                cropped = face_cropped(frame)
+                if cropped is not None:
+                    img_id += 1
+    
+                    # resize then convert to grayscale correctly
+                    face_resized = cv2.resize(cropped, (450, 450), interpolation=cv2.INTER_AREA)
+                    face_gray = cv2.cvtColor(face_resized, cv2.COLOR_BGR2GRAY)
+    
+                    file_name_path = f"Data/user.{user_id}.{img_id}.jpg"
+                    cv2.imwrite(file_name_path, face_gray)
+    
+                    cv2.putText(face_gray, str(img_id), (50, 50), cv2.FONT_HERSHEY_DUPLEX, 2, (0, 255, 0), 2)
+                    cv2.imshow("Cropped Face", face_gray)
+    
+                # break on Enter key (13) or after 100 images
+                if cv2.waitKey(1) == 13 or img_id >= 100:
+                    break
+    
+            cap.release()
+            cv2.destroyAllWindows()
+            messagebox.showinfo("Result", "Generating data sets completed !!")
+    
+        except Exception as es:
+            messagebox.showerror("Error", f"Due To:{str(es)}", parent=self.root)
+            print("generate_dataset error:", str(es))
+    
+    
 
 
 
