@@ -398,6 +398,10 @@ class Student:
         content=self.student_table.item(cursor_focus)
         data=content["values"]
 
+        # If row is empty, ignore
+        if data == "" or data is None or len(data) == 0:
+            return
+
         self.var_dep.set(data[0]),
         self.var_course.set(data[1]),
         self.var_year.set(data[2]),

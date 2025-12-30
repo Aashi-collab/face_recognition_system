@@ -1,9 +1,13 @@
 from tkinter import*
 from tkinter import ttk
-from PIL import Image, ImageTk
+from PIL import Image
+from PIL import ImageTk
 from student import Student
 import os
 from train import Train
+from face_recognition import Face_Recognition
+import cv2
+import mysql.connector
 
 class Face_Recognition_system:
     def __init__(self,root):
@@ -61,14 +65,14 @@ class Face_Recognition_system:
         b1_1.place(x=200, y=300, width=220, height=40)
 
         # detect face button
-        img5 = Image.open("college_images/aashi_new_face_detector1.jpg")
+        img5 = Image.open("college_images/face_detector1.jpg")
         img5 = img5.resize((220, 220), Image.LANCZOS)
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
-        b1 = Button(bg_img, image=self.photoimg5, cursor="hand2")
+        b1 = Button(bg_img, image=self.photoimg5, cursor="hand2", command=self.face_data)
         b1.place(x=500, y=100, width=220, height=220)
 
-        b1_1 = Button(bg_img, text="Face Detector", cursor="hand2", font=("times new roman", 15, "bold"),bg="darkblue", fg="white")
+        b1_1 = Button(bg_img, text="Face Detector", cursor="hand2", command=self.face_data, font=("times new roman", 15, "bold"),bg="darkblue", fg="white")
         b1_1.place(x=500, y=300, width=220, height=40)
 
         # attendace face button
@@ -149,6 +153,11 @@ class Face_Recognition_system:
     def train_data(self):
             self.new_window=Toplevel(self.root)
             self.app=Train(self.new_window)
+
+    
+    def face_data(self):
+            self.new_window=Toplevel(self.root)
+            self.app=Face_Recognition(self.new_window)
 
 if __name__ == "__main__":
     root=Tk()
