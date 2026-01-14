@@ -578,6 +578,7 @@ class Student:
     
             img_id = 0
             user_id = str(self.var_std_id.get())  # ensure string for filename
+            print(user_id)
     
             while True:
                 ret, frame = cap.read()
